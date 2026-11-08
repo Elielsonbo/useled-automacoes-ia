@@ -1,0 +1,144 @@
+{
+  "_sobre": "Temas da curadoria. 'chip' é o selo na arte; 'busca' são termos (em inglês, idioma do MakerWorld); 'janela' limita temas sazonais (MM-DD a MM-DD); 'peso' define a frequência relativa.",
+  "temas": [
+    {
+      "id": "halloween",
+      "chip": "Halloween",
+      "busca": [
+        "halloween",
+        "pumpkin",
+        "ghost",
+        "spooky",
+        "skull lamp"
+      ],
+      "janela": [
+        "09-15",
+        "10-31"
+      ],
+      "peso": 3
+    },
+    {
+      "id": "natal",
+      "chip": "Natal",
+      "busca": [
+        "christmas",
+        "christmas ornament",
+        "christmas tree lamp",
+        "nativity",
+        "santa"
+      ],
+      "janela": [
+        "10-15",
+        "12-25"
+      ],
+      "peso": 4
+    },
+    {
+      "id": "ano_novo",
+      "chip": "Ano Novo",
+      "busca": [
+        "new year",
+        "2027",
+        "champagne",
+        "fireworks"
+      ],
+      "janela": [
+        "12-20",
+        "01-05"
+      ],
+      "peso": 3
+    },
+    {
+      "id": "decor",
+      "chip": "Casa & Decoração",
+      "busca": [
+        "vase",
+        "planter",
+        "organizer",
+        "wall hook",
+        "holder",
+        "desk organizer",
+        "home decor"
+      ],
+      "janela": null,
+      "peso": 3
+    },
+    {
+      "id": "luminarias",
+      "chip": "Luminária Divertida",
+      "busca": [
+        "lamp",
+        "night light",
+        "lithophane lamp",
+        "led lamp",
+        "moon lamp",
+        "dragon lamp",
+        "fantasy lamp",
+        "book nook lamp"
+      ],
+      "janela": null,
+      "peso": 3
+    },
+    {
+      "id": "literatura",
+      "chip": "Filmes, Séries & Livros",
+      "busca": [
+        "harry potter",
+        "lord of the rings",
+        "star wars",
+        "book nook",
+        "movie",
+        "stranger things",
+        "bookmark"
+      ],
+      "janela": null,
+      "peso": 2
+    },
+    {
+      "id": "porta_isqueiro",
+      "chip": "Porta-isqueiro",
+      "busca": [
+        "lighter case",
+        "lighter holder",
+        "lighter sleeve",
+        "custom lighter case"
+      ],
+      "janela": null,
+      "peso": 2
+    }
+  ],
+  "foco_semana": {
+    "_sobre": "Pedidos do dono da loja para a semana. A rotina de estoque deve atender estes pedidos ANTES da distribuição normal de temas. Apague ou troque quando a semana acabar.",
+    "valido_ate": "2026-11-01",
+    "pedidos": [
+      {
+        "o_que": "Porta-isqueiro personalizado (capa ou case de isqueiro, com nome, padrão ou tema)",
+        "tema": "porta_isqueiro",
+        "minimo": 2,
+        "busca": [
+          "lighter case",
+          "lighter holder",
+          "lighter sleeve",
+          "custom lighter case",
+          "personalized lighter case"
+        ]
+      },
+      {
+        "o_que": "Luminárias diferentes ou temáticas: dragão, Harry Potter, Quarta Asa (Fourth Wing, livro de fantasia com dragões)",
+        "tema": "luminarias",
+        "minimo": 3,
+        "busca": [
+          "dragon lamp",
+          "dragon night light",
+          "harry potter lamp",
+          "hogwarts lamp",
+          "fourth wing",
+          "book nook lamp",
+          "wizard lamp",
+          "fantasy lamp"
+        ]
+      }
+    ],
+    "obs": "Na segunda (6 stories), use 2 porta-isqueiros e 3 luminárias temáticas; se faltar opção boa, complete na quinta. No texto da loja não cite marcas (ex.: 'isqueiro', não 'Bic'). Nomes de obras (Harry Potter, Quarta Asa) podem aparecer no título do story, como já acontece com o tema Filmes, Séries & Livros."
+  }
+}

@@ -1,0 +1,7 @@
+credenciais.txt
+**/credenciais.txt
+stories/dados/custos.json
+stories/dados/historico.csv
+.env
+__pycache__/
+out/

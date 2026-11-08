@@ -1,0 +1,85 @@
+name: Relatório do Instagram
+
+# Estratégia 1.1. Coleta a cada ~6 h (os números de story somem em 24 h e o
+# GitHub atrasa agendamentos) e, às segundas, gera o resumo da semana e abre
+# uma issue com ele (chega por e-mail).
+# Segredo necessário neste repositório: IG_ACCESS_TOKEN (o mesmo do publicador).
+on:
+  schedule:
+    - cron: "41 2,8,14,20 * * *"   # coleta: 23h41, 5h41, 11h41, 17h41 em Brasília
+    - cron: "23 13 * * 1"          # segunda, 10h23 em Brasília: resumo
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "coletar ou resumo"
+        default: coletar
+        type: choice
+        options: [coletar, resumo]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: relatorio-instagram
+  cancel-in-progress: false
+
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Conferir segredo
+        id: seg
+        env:
+          T: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$T" ]; then
+            echo "::warning::Falta o segredo IG_ACCESS_TOKEN neste repositório. Nada foi coletado."
+            echo "ok=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Coletar
+        if: steps.seg.outputs.ok == '1' && (github.event_name == 'schedule' || github.event.inputs.modo == 'coletar')
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: "17841405843278969"
+        run: python ferramentas/instagram/relatorio.py coletar
+
+      - name: Resumo da semana
+        id: resumo
+        if: steps.seg.outputs.ok == '1' && ((github.event_name == 'schedule' && github.event.schedule == '23 13 * * 1') || github.event.inputs.modo == 'resumo')
+        run: |
+          python ferramentas/instagram/relatorio.py resumo > /tmp/resumo.md
+          echo "feito=1" >> "$GITHUB_OUTPUT"
+
+      - name: Salvar dados
+        if: always() && steps.seg.outputs.ok == '1'
+        run: |
+          git config user.name "useled-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A instagram/
+          git diff --cached --quiet && exit 0
+          git commit -m "Instagram: dados $(date -u +%FT%TZ)"
+          # O GitHub às vezes devolve erro 500 no push: tenta até 5 vezes
+          for i in 1 2 3 4 5; do
+            git pull --rebase && git push && exit 0
+            echo "push falhou (tentativa $i), tentando de novo em $((i*15))s"; sleep $((i*15))
+          done
+          exit 1
+
+      - name: Abrir issue com o resumo
+        if: steps.resumo.outputs.feito == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Instagram: resumo da semana $(TZ=America/Sao_Paulo date +%d/%m)" \
+            --body-file /tmp/resumo.md
