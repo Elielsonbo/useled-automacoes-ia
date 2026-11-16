@@ -1,0 +1,5 @@
+[
+ {"data": "2026-11-17", "canal": "Shopee", "pedido": "EXEMPLO-001", "produto": "Porta-retratos", "variacao": "Kit 5", "unidades": 5, "status": "A liberar", "pago": 50.00, "recebido": 36.00},
+ {"data": "2026-11-18", "canal": "Site", "pedido": "#000", "produto": "Luminária de mesa", "variacao": "Preta", "unidades": 1, "status": "Concluído", "pago": 200.00, "recebido": 186.00},
+ {"pedido": "EXEMPLO-001", "status": "Concluído"}
+]

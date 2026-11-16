@@ -1,0 +1,8 @@
+{
+ "_info": "EXEMPLO com valores ilustrativos. O catálogo real (consumo por peça de cada produto) fica só no computador da loja. 'unidades' = número de peças do pedido; embalagem é por pedido.",
+ "embalagem_padrao": 1.0,
+ "produtos": [
+  {"nome": "Porta-retratos", "padroes": ["^porta-retratos"], "por_unidade": {"filamento_g": 10, "impressao_h": 0.5, "imas": 4}},
+  {"nome": "Luminária de mesa", "padroes": ["^lumin[aá]ria"], "por_unidade": {"filamento_g": 250, "impressao_h": 8, "lampadas": 1, "rabichos": 1}, "embalagem_por_pedido": 3.0}
+ ]
+}

@@ -15,6 +15,7 @@ Portfólio das automações que construí para a **Use Led**, minha loja de lumi
 | **Story semanal de produto** | Rodízio dos produtos da Shopee nos stories | GitHub Actions | 1 por semana |
 | **Renovação de token** | Renova o token de 60 dias da API do Instagram e atualiza o segredo no GitHub | GitHub Actions | todo domingo |
 | **Relatório do Instagram** | Coleta métricas 4x por dia e gera um resumo semanal (alcance por tema, manhã × noite, melhor story) | GitHub Actions | semanal |
+| **Lançamento de vendas** | O agente coleta os pedidos da semana na Shopee, no TikTok Shop e no site, lança na planilha de custos (sem duplicar), recalcula lucro e margem e envia o resumo ao dono | Claude (tarefa agendada) + Python | toda segunda |
 | **Pins do Pinterest** | Gera artes 1000x1500 e a planilha de criação em massa dos pins da Shopee; o catálogo do site sincroniza pelo app da Nuvemshop | Python + Playwright | mensal |
 
 ## Como funciona
@@ -33,7 +34,7 @@ flowchart LR
 
 ## Como uso a IA
 
-- **Agente de curadoria:** o Claude segue rotinas escritas em linguagem natural ([`docs/ROTINA_ESTOQUE.md`](docs/ROTINA_ESTOQUE.md), [`docs/ROTINA_STORY.md`](docs/ROTINA_STORY.md)) com regras de negócio: temas da semana, sazonalidade, sem repetir modelo por 30 dias, evitar peças muito complexas ou com conotação política.
+- **Agente de curadoria:** o Claude segue rotinas escritas em linguagem natural ([`docs/ROTINA_ESTOQUE.md`](docs/ROTINA_ESTOQUE.md), [`docs/ROTINA_STORY.md`](docs/ROTINA_STORY.md), [`docs/ROTINA_VENDAS_SEMANAL.md`](docs/ROTINA_VENDAS_SEMANAL.md)) com regras de negócio: temas da semana, sazonalidade, sem repetir modelo por 30 dias, evitar peças muito complexas ou com conotação política.
 - **Prompt engineering como especificação:** cada rotina diz o que fazer, em que ordem, o que registrar e quando parar e avisar o dono.
 - **Desenvolvimento assistido por IA:** scripts Python, workflows do GitHub Actions e integração com a API da Meta construídos em parceria com o Claude.
 - **Criação de conteúdo:** identidade visual da marca, artes, etiquetas de embalagem e posts gerados com IA a partir de um manual de marca.
@@ -54,13 +55,14 @@ docs/         rotinas do agente, planejamento e registro de decisões
 stories/      curadoria (escolha de tema), arte, publicação e histórico
 pinterest/    gerador de pins e planilha de criação em massa
 instagram/    coleta de métricas e relatório semanal
+vendas/       lançamento semanal de pedidos na planilha de custos
 ```
 
 O publicador em produção, com os workflows, fica no repositório público [**useled-stories-midia**](https://github.com/Elielsonbo/useled-stories-midia).
 
 ## Stack
 
-Python · GitHub Actions · Playwright · API do Instagram (Meta Graph) · Claude (agente de IA) · HTML/CSS · Nuvemshop · Shopee · Pinterest
+Python · openpyxl/LibreOffice · GitHub Actions · Playwright · API do Instagram (Meta Graph) · Claude (agente de IA) · HTML/CSS · Nuvemshop · Shopee · Pinterest
 
 ## Segurança
 
